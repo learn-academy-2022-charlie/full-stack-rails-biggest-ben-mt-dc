@@ -42,3 +42,76 @@ In a browser navigate to: http://localhost:3000
 # RESTful Routes
 
 ## Index
+
+app > config > routes.rb
+
+```
+Rails.application.routes.draw do
+  root 'blog#index'
+end
+```
+
+app > controllers > >blog_controller.rb
+
+```
+class BlogController < ApplicationController
+    
+    def index
+        @blogs = Blog.all
+    end
+
+end
+```
+
+app > views > blog > index.html.erb
+
+```
+<h1> Welcome to our blog </h1>
+
+<ul>
+<% @blogs.each do |blog| %>
+<li>
+<%= blog.title %>
+</li>
+<% end %>
+</ul>
+```
+
+## Show
+
+app > config > routes.rb
+
+```
+Rails.application.routes.draw do
+  root 'blog#index'
+  get 'show/:id' => 'blog#show', as: 'blog'
+end
+```
+
+app > controllers > >blog_controller.rb
+
+```
+class BlogController < ApplicationController
+
+**CHANGE BELOW THIS*+*
+    
+    def index
+        @blogs = Blog.all
+    end
+
+end
+```
+
+app > views > blog > index.html.erb
+
+```
+<h1> Welcome to our blog </h1>
+
+<ul>
+<% @blogs.each do |blog| %>
+<li>
+<%= blog.title %>
+</li>
+<% end %>
+</ul>
+```
