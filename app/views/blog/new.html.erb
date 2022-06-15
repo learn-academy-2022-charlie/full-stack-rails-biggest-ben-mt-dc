@@ -1,0 +1,16 @@
+<h1> Write a new blog post </h1>
+
+<%= form_with url:'/blog', local:true do |form| %>
+<%= form.label :title %>
+<%= form.text_field :title %>
+<br>
+<br>
+<%= form.label :content %>
+<%= form.text_field :content %>
+<br>
+<br>
+<%= form.submit 'post blog' %>
+<% end %>
+<br>
+<br>
+<p><%= link_to 'Back Home', home_path %></p>
