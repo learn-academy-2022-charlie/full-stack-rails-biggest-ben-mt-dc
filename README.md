@@ -92,13 +92,14 @@ app > controllers > >blog_controller.rb
 
 ```
 class BlogController < ApplicationController
-
-**CHANGE BELOW THIS*+*
-    
+ 
     def index
         @blogs = Blog.all
     end
 
+    def show
+        @blog = Blog.find(params[:id])
+    end
 end
 ```
 
@@ -109,9 +110,76 @@ app > views > blog > index.html.erb
 
 <ul>
 <% @blogs.each do |blog| %>
-<li>
-<%= blog.title %>
-</li>
+    <li>
+        <%= link_to blog.title, blog_path(blog) %>
+        
+    </li>
 <% end %>
 </ul>
+```
+
+app > views > blog > index.html.erb
+
+```
+<h1> This blog: </h1>
+
+<p>Title:<%=@blog.title%> </p>
+<br>
+<p><%=@blog.content%></p>
+<br>
+<br>
+<p><%= link_to 'go back home', home_path%></p>
+```
+
+## New
+
+app > config > routes.rb
+
+```
+Rails.application.routes.draw do
+  root 'blog#index', as: 'home'
+  get 'blog/new' => 'blog#new', as: 'new_blog'
+  get 'blog/:id' => 'blog#show', as: 'blog'
+end
+```
+
+app > controllers > >blog_controller.rb
+
+```
+class BlogController < ApplicationController
+ 
+    def index
+        @blogs = Blog.all
+    end
+
+    def show
+        @blog = Blog.find(params[:id])
+    end
+
+    def new
+       @blog = Blog.new
+    end
+        
+end
+```
+
+app > views > blog > index.html.erb
+
+```
+<h1> Write a new blog post </h1>
+
+<%= form_with url:'/blog', local:true do |form| %>
+<%= form.label :title %>
+<%= form.text_field :title %>
+<br>
+<br>
+<%= form.label :content %>
+<%= form.text_field :content %>
+<br>
+<br>
+<%= form.submit 'post blog' %>
+<% end %>
+<br>
+<br>
+<p><%= link_to 'Back Home', home_path %></p>
 ```
