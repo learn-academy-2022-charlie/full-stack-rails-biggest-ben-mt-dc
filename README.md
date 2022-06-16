@@ -118,7 +118,7 @@ app > views > blog > index.html.erb
 </ul>
 ```
 
-app > views > blog > index.html.erb
+app > views > blog > show.html.erb
 
 ```
 <h1> This blog: </h1>
@@ -131,7 +131,7 @@ app > views > blog > index.html.erb
 <p><%= link_to 'go back home', home_path%></p>
 ```
 
-## New
+## New / Create
 
 app > config > routes.rb
 
@@ -140,6 +140,7 @@ Rails.application.routes.draw do
   root 'blog#index', as: 'home'
   get 'blog/new' => 'blog#new', as: 'new_blog'
   get 'blog/:id' => 'blog#show', as: 'blog'
+  post 'blog' => 'blog#create'
 end
 ```
 
@@ -164,6 +165,23 @@ end
 ```
 
 app > views > blog > index.html.erb
+
+```
+<h1> Welcome to our blog </h1>
+
+<ul>
+<% @blogs.each do |blog| %>
+    <li>
+        <%= link_to blog.title, blog_path(blog) %>
+        
+    </li>
+<% end %>
+</ul>
+<%= link_to 'create a new blog', new_blog_path %>
+        
+```
+
+app > views > blog > new.html.erb
 
 ```
 <h1> Write a new blog post </h1>
