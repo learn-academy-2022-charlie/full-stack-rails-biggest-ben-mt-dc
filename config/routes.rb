@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   get 'blog/new' => 'blog#new', as: 'new_blog'
   get 'blog/:id' => 'blog#show', as: 'blog'
   post 'blog' => 'blog#create'
-  delete 'blog/:id', to: 'blog#destroy'
+  get 'blog/:id/update' => 'blog#update', as: 'blog_update'
+  delete 'blog/:id' => 'blog#destroy'
 end

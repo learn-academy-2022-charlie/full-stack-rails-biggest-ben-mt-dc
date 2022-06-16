@@ -1,0 +1,7 @@
+<h1> Update Blog </h1>
+
+<%= form_with model: @blog, url: blog_path(@blog), method: :patch, local: true do |form| %>
+<%= form.text_field :title %>
+<%= form.text_area :content %>
+<%= form.submit %>
+<% end >

@@ -26,11 +26,18 @@ class BlogController < ApplicationController
         end
 
     end
+
     def destroy
-@blog = Blog.find(params[:id])
-@blog.destroy
-redirect_to home_path
+        @blog = Blog.find(params[:id])
+        @blog.destroy
+        redirect_to home_path, :status => :see_other
     end
+
+    def update
+        @blog = Blog.find(params[:id])
+        render :update
+    end
+
     # Not currently working
     # private
     # def blog_params
