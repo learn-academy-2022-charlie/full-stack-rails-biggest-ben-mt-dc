@@ -11,19 +11,28 @@ class BlogController < ApplicationController
     def new
        @blog = Blog.new
     end
-        # Code below to be implemented during "create"
-        # @blog = Blog.new(
-        # title: params[:title],
-        # content: params[:content]
-        # )
-def create
-@blog = Blog.create(
-    title: params[:title],
-    content: params[:content]
 
-)
+    def create
+        @blog = Blog.create(
+            # blog_params
+            title: params[:title],
+            content: params[:content]
+        )
 
-end
+        if @blog.valid?
+            redirect_to home_path
+        else
+            redirect_to new_blog_path
+        end
 
+    end
+
+    # Not currently working
+    # private
+    # def blog_params
+    #     params.require(:blog).permit(:title, :content)
+    # end
+
+    
 end
 
